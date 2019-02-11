@@ -26,5 +26,6 @@ while True:
         led_sensor_instance.blink_temp_change()
         led_sensor_instance.blink_humidity_change()
         led_sensor_instance.set_led_init_state()
+        time.sleep(time_recheck_reading)
     except KeyboardInterrupt:
         led_sensor_instance.reset_led_init_state()
