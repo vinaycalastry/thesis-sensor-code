@@ -10,11 +10,12 @@ GPIO.setmode(GPIO.BCM)
 class LEDSensor:
 
     def __init__(self, red_pin, green_pin, blue_pin, times_to_blink):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
         self.RED = red_pin
         self.GREEN = green_pin
         self.BLUE = blue_pin
-        self.times_to_blink = times_to_blink
-        GPIO.setwarnings(False)    
+        self.times_to_blink = times_to_blink    
         GPIO.setup(self.RED, GPIO.OUT)
         GPIO.setup(self.GREEN, GPIO.OUT)
         GPIO.setup(self.BLUE, GPIO.OUT)
@@ -40,7 +41,6 @@ class LEDSensor:
         GPIO.output(self.RED, 1)
         GPIO.output(self.GREEN, 0)
         GPIO.output(self.BLUE, 0)
-        time.sleep(self.times_to_blink)
         self.set_led_init_state()            
 
 
@@ -51,5 +51,4 @@ class LEDSensor:
         GPIO.output(self.RED, 0)
         GPIO.output(self.GREEN, 0)
         GPIO.output(self.BLUE, 1)
-        time.sleep(self.times_to_blink)
         self.set_led_init_state()
