@@ -35,3 +35,8 @@ while True:
         time.sleep(time_recheck_reading)
     except KeyboardInterrupt:
         led_sensor_instance.reset_led_init_state()
+    except Exception:
+        print("Script Stopped")
+
+    finally:
+        print("Service Stopped")
