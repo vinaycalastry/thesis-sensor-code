@@ -55,7 +55,7 @@ while True:
         else:
             print("Humidity Change NOT detected")
 
-        print("at:", time_captured)
+        print("Time:", time_captured)
 
         led_sensor_instance.set_led_init_state()
         old_temp, old_humidity = temp, humidity

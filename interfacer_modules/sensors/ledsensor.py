@@ -40,7 +40,8 @@ class LEDSensor:
         GPIO.output(self.RED, 1)
         GPIO.output(self.GREEN, 0)
         GPIO.output(self.BLUE, 0)
-        time.sleep(self.times_to_blink)            
+        time.sleep(self.times_to_blink)
+        self.set_led_init_state()            
 
 
     def blink_humidity_change(self):
@@ -51,3 +52,4 @@ class LEDSensor:
         GPIO.output(self.GREEN, 0)
         GPIO.output(self.BLUE, 1)
         time.sleep(self.times_to_blink)
+        self.set_led_init_state()
