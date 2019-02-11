@@ -52,9 +52,11 @@ class LEDSensor:
         # GPIO.output(self.RED, 1)
         # GPIO.output(self.GREEN, 0)
         # GPIO.output(self.BLUE, 0)
-        if self.greenStatus:
-            self.r.ChangeDutyCycle(0)
+        if self.greenStatus or self.blueStatus:
+            self.g.ChangeDutyCycle(0)
             self.greenStatus = False
+            self.b.ChangeDutyCycle(0)
+            self.blueStatus = False
         if not self.redStatus:
             self.r.ChangeDutyCycle(50)
             self.redStatus = True
@@ -66,10 +68,12 @@ class LEDSensor:
         # GPIO.output(self.RED, 0)
         # GPIO.output(self.GREEN, 0)
         # GPIO.output(self.BLUE, 1)
-        if self.greenStatus:
+        if self.greenStatus or self.redStatus:
             self.r.ChangeDutyCycle(0)
             self.greenStatus = False
+            self.g.ChangeDutyCycle(0)
+            self.greenStatus = False
         if not self.blueStatus:
-            self.r.ChangeDutyCycle(50)
+            self.b.ChangeDutyCycle(50)
             self.blueStatus = True
 
