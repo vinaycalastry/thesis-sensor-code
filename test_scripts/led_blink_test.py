@@ -4,6 +4,10 @@ import os
 import datetime
 import time
 
+## To import from interfacer_modules which is one directory above
+import sys
+sys.path.append("..")
+
 ## Custom modules
 from interfacer_modules.sensors.ledsensor import LEDSensor
 
