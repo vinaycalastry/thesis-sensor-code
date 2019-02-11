@@ -37,8 +37,9 @@ while run:
         time.sleep(time_recheck_reading)
     except KeyboardInterrupt:
         run = False
+        print("Script stopped by user interrupt")
         led_sensor_instance.reset_led_init_state()
     except Exception as e:
         run = False
-        print("Script Stopped")
+        print("Script Stopped due to exception: "+e)
     
