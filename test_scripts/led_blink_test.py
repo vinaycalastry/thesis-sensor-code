@@ -15,7 +15,7 @@ from interfacer_modules.sensors.ledsensor import LEDSensor
 RED = 4
 GREEN = 3
 BLUE = 2
-times_to_blink = 5
+times_to_blink = 10
 time_recheck_reading = 60
 
 ## LED sensor init
@@ -29,7 +29,6 @@ while True:
     try:
         led_sensor_instance.blink_temp_change()
         led_sensor_instance.blink_humidity_change()
-        led_sensor_instance.set_led_init_state()
         time.sleep(time_recheck_reading)
     except KeyboardInterrupt:
         led_sensor_instance.reset_led_init_state()
