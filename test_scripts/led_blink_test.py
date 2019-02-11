@@ -33,12 +33,12 @@ while run:
         time.sleep(times_to_blink)
         led_sensor_instance.set_led_init_state()
         time.sleep(time_recheck_reading)
-    except KeyboardInterrupt:
-        led_sensor_instance.reset_led_init_state()
+    # except KeyboardInterrupt:
+    #     led_sensor_instance.reset_led_init_state()
     except Exception as e:
         print(e)
         print("Script Stopped")
 
-    finally:
-        run = False
-        print("Service Stopped")
+    # finally:
+    #     run = False
+    #     print("Service Stopped")
