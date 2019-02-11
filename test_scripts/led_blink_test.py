@@ -28,8 +28,10 @@ old_temp, old_humidity = 0, 0
 while True:
     try:
         led_sensor_instance.blink_temp_change()
-        # time.sleep(10)
+        time.sleep(times_to_blink)
         led_sensor_instance.blink_humidity_change()
+        time.sleep(times_to_blink)
+        led_sensor_instance.set_led_init_state()
         time.sleep(time_recheck_reading)
     except KeyboardInterrupt:
         led_sensor_instance.reset_led_init_state()
