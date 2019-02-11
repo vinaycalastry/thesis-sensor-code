@@ -32,8 +32,9 @@ class LEDSensor:
         # GPIO.output(self.RED, 0)
         # GPIO.output(self.GREEN, 1)
         # GPIO.output(self.BLUE, 0)
-        self.g.start(0)
+        self.g.ChangeDutyCycle(50)
         self.greenStatus = True
+        
 
 
     ## function to reset LED state
