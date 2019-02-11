@@ -31,14 +31,13 @@ while run:
         time.sleep(times_to_blink)
         led_sensor_instance.blink_humidity_change()
         time.sleep(times_to_blink)
+        led_sensor_instance.no_change()
         led_sensor_instance.set_led_init_state()
         time.sleep(time_recheck_reading)
-    # except KeyboardInterrupt:
-    #     led_sensor_instance.reset_led_init_state()
+    except KeyboardInterrupt:
+        run = False
+        led_sensor_instance.reset_led_init_state()
     except Exception as e:
-        print(e)
+        run = False
         print("Script Stopped")
-
-    # finally:
-    #     run = False
-    #     print("Service Stopped")
+    

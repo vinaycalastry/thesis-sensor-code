@@ -68,10 +68,22 @@ class LEDSensor:
 
         if self.greenStatus or self.redStatus:
             self.r.ChangeDutyCycle(0)
-            self.greenStatus = False
+            self.redStatus = False
             self.g.ChangeDutyCycle(0)
             self.greenStatus = False
         if not self.blueStatus:
             self.b.ChangeDutyCycle(50)
             self.blueStatus = True
 
+    def no_change(self):
+        """
+        Run this method when no change in temp or humidity is observed
+        """
+        if self.blueStatus or self.redStatus:
+            self.g.ChangeDutyCycle(0)
+            self.greenStatus = False
+            self.b.ChangeDutyCycle(0)
+            self.blueStatus = False
+        if not self.greenStatus:
+            self.g.ChangeDutyCycle(50)
+            self.greenStatus = True
