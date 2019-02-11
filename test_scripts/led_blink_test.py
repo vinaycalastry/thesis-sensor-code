@@ -25,7 +25,9 @@ led_sensor_instance = LEDSensor(RED, GREEN, BLUE, times_to_blink)
 led_sensor_instance.set_led_init_state()
 
 old_temp, old_humidity = 0, 0
-while True:
+
+run = True
+while run:
     try:
         led_sensor_instance.blink_temp_change()
         time.sleep(times_to_blink)
@@ -39,4 +41,5 @@ while True:
         print("Script Stopped")
 
     finally:
+        run = False
         print("Service Stopped")
