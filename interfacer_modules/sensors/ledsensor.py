@@ -29,9 +29,6 @@ class LEDSensor:
     ## function to set initial LED state
     def set_led_init_state(self):
         GPIO.setmode(GPIO.BCM)
-        # GPIO.output(self.RED, 0)
-        # GPIO.output(self.GREEN, 1)
-        # GPIO.output(self.BLUE, 0)
         self.r.start(0)
         self.g.start(0)
         self.b.start(0)
@@ -54,9 +51,7 @@ class LEDSensor:
         """
         This will make the LED blink red
         """
-        # GPIO.output(self.RED, 1)
-        # GPIO.output(self.GREEN, 0)
-        # GPIO.output(self.BLUE, 0)
+
         if self.greenStatus or self.blueStatus:
             self.g.ChangeDutyCycle(0)
             self.greenStatus = False
@@ -70,9 +65,7 @@ class LEDSensor:
         """
         This will make the LED blink blue
         """
-        # GPIO.output(self.RED, 0)
-        # GPIO.output(self.GREEN, 0)
-        # GPIO.output(self.BLUE, 1)
+
         if self.greenStatus or self.redStatus:
             self.r.ChangeDutyCycle(0)
             self.greenStatus = False
