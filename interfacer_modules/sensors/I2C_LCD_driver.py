@@ -2,6 +2,7 @@
 # Original code found at:
 # https://gist.github.com/DenisFromHR/cc863375a6e19dce359d
 
+
 """
 Compiled, mashed and generally mutilated 2014-2015 by Denis Pleic
 Made available under GNU GENERAL PUBLIC LICENSE
@@ -14,15 +15,17 @@ Made available under GNU GENERAL PUBLIC LICENSE
 # 2015-02-10, ver 0.1
 
 """
+import smbus
+## To import from interfacer_modules which is one directory above
+import sys
+sys.path.append("../..")
+import project_settings
+from time import sleep
 
 # i2c bus (0 -- original Pi, 1 -- Rev 2 Pi)
-I2CBUS = 1
-
+I2CBUS = project_settings.I2CBUS
 # LCD Address
-ADDRESS = 0x27
-
-import smbus
-from time import sleep
+ADDRESS = project_settings.I2CADDRESS
 
 class i2c_device:
    def __init__(self, addr, port=I2CBUS):
