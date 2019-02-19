@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/python3
 
 ##Testing  dht11 -> mqtt
 
