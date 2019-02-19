@@ -17,7 +17,7 @@ from interfacer_modules.sensors import I2C_LCD_driver
 
 lcd_sensor_instance = I2C_LCD_driver.lcd()
 time_recheck_reading = project_settings.time_recheck_reading
-DEGREE_SYMBOL = chr(176)
+
 # Define MQTT Variables
 MQTT_HOST = "192.168.0.14"
 MQTT_PORT = 1883
@@ -48,7 +48,7 @@ def on_message(mosq, obj, msg):
     temp, humidity, time_recorded = json.loads(res)
     temp_in_f = celsius_to_fahrenheit(temp)
     lcd_sensor_instance.lcd_clear()
-    lcd_sensor_instance.lcd_display_string(str("Temp: "+str(temp_in_f)+DEGREE_SYMBOL+"F"), project_settings.TEMP_DISPLAY, project_settings.OFFSET)
+    lcd_sensor_instance.lcd_display_string(str("Temp: "+str(temp_in_f)"F"), project_settings.TEMP_DISPLAY, project_settings.OFFSET)
     lcd_sensor_instance.lcd_display_string(str("Humidity: "+str(humidity)+"%"), project_settings.HUMIDITY_DISPLAY, project_settings.OFFSET)
     print("msg received: "+str(msg.payload))
     
