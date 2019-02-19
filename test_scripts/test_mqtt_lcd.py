@@ -48,7 +48,7 @@ def on_message(mosq, obj, msg):
     res = str(msg.payload)
     temp, humidity, time_recorded = json.loads(res)
     temp_in_f = celsius_to_fahrenheit(temp)
-    lcd_sensor_instance = I2C_LCD_driver.lcd()
+    print("Temp in F is"+temp_in_f)
     #lcd_sensor_instance.lcd_clear()
     #lcd_sensor_instance.lcd_display_string(str("Temp: "+temp_in_f+"F"), project_settings.TEMP_DISPLAY, project_settings.OFFSET)
     #lcd_sensor_instance.lcd_display_string(str("Humidity: "+humidity+"%"), project_settings.HUMIDITY_DISPLAY, project_settings.OFFSET)
