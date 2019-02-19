@@ -17,7 +17,7 @@ from interfacer_modules.sensors import I2C_LCD_driver
 
 lcd_sensor_instance = I2C_LCD_driver.lcd()
 time_recheck_reading = project_settings.time_recheck_reading
-DEGREE_SYMBOL = '\u00b0'
+DEGREE_SYMBOL = chr(176)
 # Define MQTT Variables
 MQTT_HOST = "192.168.0.14"
 MQTT_PORT = 1883
