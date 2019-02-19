@@ -17,7 +17,7 @@ from interfacer_modules.sensors.dht11sensor import DHT11sensor
 import paho.mqtt.client as mqtt
 
 # Define MQTT Variables
-MQTT_HOST = "192.168.0.15"
+MQTT_HOST = "iot.eclipse.org"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 45
 MQTT_TOPIC = "vinay_sensor_test"
@@ -41,11 +41,7 @@ mqttc = mqtt.Client()
 mqttc.on_publish = on_publish
 
 # Connect with MQTT Broker
-mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL) 
-
-
-
-
+mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
 
 while True:
     ## Get readings
