@@ -17,10 +17,10 @@ from interfacer_modules.sensors.dht11sensor import DHT11sensor
 import paho.mqtt.client as mqtt
 
 # Define MQTT Variables
-MQTT_HOST = "iot.eclipse.org"
+MQTT_HOST = "192.168.0.15"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 45
-MQTT_TOPIC = "vinay_sensor_test"
+MQTT_TOPIC = "vinay"
 
 ## IOT sensor values
 dht_version = project_settings.dht_version

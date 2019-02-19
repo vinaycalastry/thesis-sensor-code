@@ -19,10 +19,10 @@ lcd_sensor_instance = I2C_LCD_driver.lcd()
 time_recheck_reading = project_settings.time_recheck_reading
 
 # Define MQTT Variables
-MQTT_HOST = "iot.eclipse.org"
+MQTT_HOST = "192.168.0.15"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 45
-MQTT_TOPIC = "vinay_sensor_test"
+MQTT_TOPIC = "vinay"
 
 def fahrenheit_to_celsius(temperature):
     return round((temperature * 9/5) + 32)
