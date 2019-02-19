@@ -17,8 +17,8 @@ from interfacer_modules.sensors.dht11sensor import DHT11sensor
 import paho.mqtt.client as mqtt
 
 # Define MQTT Variables
-MQTT_HOST = "192.168.0.15"
-MQTT_PORT = 1884
+MQTT_HOST = "192.168.0.14"
+MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 45
 MQTT_TOPIC = "iot_test"
 
