@@ -19,7 +19,7 @@ lcd_sensor_instance = I2C_LCD_driver.lcd()
 time_recheck_reading = project_settings.time_recheck_reading
 
 # Define MQTT Variables
-MQTT_HOST = "192.168.0.15"
+MQTT_HOST = "iot.eclipse.org"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 45
 MQTT_TOPIC = "vinay_sensor_test"
@@ -34,16 +34,17 @@ def celsius_to_fahrenheit(temperature):
 # Define on connect event function
 # We shall subscribe to our Topic in this function
 def on_connect(mosq, obj, rc):
+    print("Connected")
     mqttc.subscribe(MQTT_TOPIC, 0)
 
-# Define on_message event function. 
+# Define on_message event function.
 # This function will be invoked every time,
-# a new message arrives for the subscribed topic 
+# a new message arrives for the subscribed topic
 def on_message(mosq, obj, msg):
     res = str(msg.payload)
     temp, humidity, time_recorded = json.loads(res)
     temp_in_f = celsius_to_fahrenheit(temp)
-    lcd_sensor_instance.lcd_clear() 
+    # lcd_sensor_instance.lcd_clear()
     lcd_sensor_instance.lcd_display_string("Temp: "+temp_in_f+"F", project_settings.TEMP_DISPLAY, project_settings.OFFSET)
     lcd_sensor_instance.lcd_display_string("Humidity: "+humidity+"%", project_settings.HUMIDITY_DISPLAY, project_settings.OFFSET)
 
@@ -60,6 +61,7 @@ mqttc.on_subscribe = on_subscribe
 
 # Connect with MQTT Broker
 mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
+print("Connected")
 
 # Continue monitoring the incoming messages for subscribed topic
 mqttc.loop_forever()
