@@ -44,12 +44,12 @@ def on_connect(mosq, obj, rc):
 # This function will be invoked every time,
 # a new message arrives for the subscribed topic
 def on_message(mosq, obj, msg):
-    res = str(msg.payload)
+    res = str(msg.payload, 'utf-8')
     temp, humidity, time_recorded = json.loads(res)
     temp_in_f = celsius_to_fahrenheit(temp)
     lcd_sensor_instance.lcd_clear()
-    lcd_sensor_instance.lcd_display_string(str("Temp: "+temp_in_f+"F"), project_settings.TEMP_DISPLAY, project_settings.OFFSET)
-    lcd_sensor_instance.lcd_display_string(str("Humidity: "+humidity+"%"), project_settings.HUMIDITY_DISPLAY, project_settings.OFFSET)
+    lcd_sensor_instance.lcd_display_string(str("Temp: "+str(temp_in_f)+"F"), project_settings.TEMP_DISPLAY, project_settings.OFFSET)
+    lcd_sensor_instance.lcd_display_string(str("Humidity: "+str(humidity)+"%"), project_settings.HUMIDITY_DISPLAY, project_settings.OFFSET)
     print("msg received: "+str(msg.payload))
     
     
