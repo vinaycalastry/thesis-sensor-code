@@ -3,6 +3,7 @@
 ##Testing  mqtt -> lcd
 
 ## To import from interfacer_modules which is one directory above
+import os
 import sys
 sys.path.append("..")
 import datetime

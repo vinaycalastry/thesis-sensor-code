@@ -1,9 +1,12 @@
 #!/bin/bash
 
 ##Testing  dht11 -> mqtt
+
+import os
 ## To import from interfacer_modules which is one directory above
 import sys
 sys.path.append("..")
+
 import datetime
 import time
 import json
