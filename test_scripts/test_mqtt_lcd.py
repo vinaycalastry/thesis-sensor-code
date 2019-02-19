@@ -30,6 +30,9 @@ def fahrenheit_to_celsius(temperature):
 def celsius_to_fahrenheit(temperature):
     return round(temperature * 1.8 + 32)
 
+# Initiate MQTT Client
+mqttc = mqtt.Client()
+
 # get data from mqtt topic
 # Define on connect event function
 # We shall subscribe to our Topic in this function
@@ -52,8 +55,7 @@ def on_message(mosq, obj, msg):
 def on_subscribe(mosq, obj, mid, granted_qos):
     print("Subscribed to Topic: " + MQTT_TOPIC + " with QoS: " + str(granted_qos))
 
-# Initiate MQTT Client
-mqttc = mqtt.Client()
+
 
 # Assign event callbacks
 mqttc.on_message = on_message
@@ -62,7 +64,7 @@ mqttc.on_subscribe = on_subscribe
 
 # Connect with MQTT Broker
 mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
-print("Connected")
+mqttc.subscribe(MQTT_TOPIC, 0)
 
 # Continue monitoring the incoming messages for subscribed topic
 mqttc.loop_forever()
