@@ -18,9 +18,9 @@ import paho.mqtt.client as mqtt
 
 # Define MQTT Variables
 MQTT_HOST = "192.168.0.15"
-MQTT_PORT = 1883
+MQTT_PORT = 1884
 MQTT_KEEPALIVE_INTERVAL = 45
-MQTT_TOPIC = "vinay"
+MQTT_TOPIC = "iot_test"
 
 ## IOT sensor values
 dht_version = project_settings.dht_version
