@@ -50,7 +50,7 @@ def on_message(mosq, obj, msg):
     lcd_sensor_instance.lcd_clear()
     lcd_sensor_instance.lcd_display_string(str("T: "+str(temp_in_f)+"F, H: "+str(humidity)+"%"), project_settings.TEMP_DISPLAY, project_settings.OFFSET)
     #cd_sensor_instance.lcd_display_string(str("Humidity: "+str(humidity)+"%"), project_settings.HUMIDITY_DISPLAY, project_settings.OFFSET)
-    lcd_sensor_instance.lcd_display_string("Time: "+time_recorded.split()[1][:-7])
+    lcd_sensor_instance.lcd_display_string("Time: "+time_recorded.split()[1][:-7], project_settings.HUMIDITY_DISPLAY, project_settings.OFFSET)
     print("msg received: "+str(msg.payload))
     
     
