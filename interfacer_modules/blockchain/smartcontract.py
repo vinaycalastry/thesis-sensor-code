@@ -51,3 +51,13 @@ class SmartContractCaller:
 
         return temp_and_humidity
 
+    ##function to save swarm filehash to blockchain
+    def set_filehash_blockchain(self, filehash):
+        set_fn_txn_hash = self.sensor_contract.functions.setSensorData(filehash).transact({"from":self.executor_address})
+        res = self.w3.eth.waitForTransactionReceipt(set_fn_txn_hash)
+        return res
+
+    ## function to get latest swarm filehash
+    def get_filehash_latest(self):
+        filehash = self.sensor_contract.functions.getSensorDataLatest().call({"from":self.executor_address})
+        return filehash

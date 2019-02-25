@@ -4,6 +4,8 @@ import os
 import datetime
 import time
 import project_settings
+import requests
+import json
 
 ## Custom modules
 from interfacer_modules.blockchain.smartcontract import SmartContractCaller
@@ -31,18 +33,56 @@ smart_contract_instance.create_smartcontract_obj()
 ## DHT11 sensor init
 dht11_sensor_instance = DHT11sensor(dht_version, dht_GPIO)
 
+## Create payload to store in swarm
+def create_payload(temperature, humidity):
+    """
+        Data to store as payload in swarm
+        1. Temperature
+        2. Humidity
+        3. Temperature Units (Celsius)
+        4. Humidity Units (%)
+        5. Timestamp
+        6. Device type
+        7. Device ID 
+        8. Sensor Type
+        9. GPIO pin attached
+    """
+    
+    ## Get current time
+    current_time = str(datetime.datetime.now())
+
+    payload = {
+        "Temperature": temperature,
+        "Humidity": humidity,
+        "TemperatureUnits": "Celsius",
+        "HumidityUnits": "%",
+        "Timestamp": current_time,
+        "DeviceType": project_settings.device_type,
+        "DeviceID": project_settings.producer_device_id,
+        "SensorType": project_settings.sensor_type,
+        "PinConnected": project_settings.dht_GPIO
+    }
+    return json.dumps(payload)
+
+
 while True:
     ## Get readings
     current_temperature, current_humidity = dht11_sensor_instance.get_dht_readings()
 
-    ## Get current time
-    current_time = str(datetime.datetime.now())
+    ## Create a payload tot store in Swarm
+    swarm_store = create_payload(current_temperature, current_humidity)
 
-    ## Set the latest temp and humidity
-    smart_contract_instance.set_tempandhumidity_blockchain(current_temperature, current_humidity, current_time)
+    ## Send POST request to swarm to store the payload
+    r = requests.post(project_settings.swarm_blockchain_url,data=swarm_store , headers={'Content-Type': 'text/plain'})
 
-    ## Print Result
-    print("Temp: ",current_temperature," and Humidtity: ",current_humidity," set at: ", current_time)
+    ## Store the received filehash for swarm
+    filehash = r.text
+
+    ## Save the filehash in blockchain
+    smart_contract_instance.set_filehash_blockchain(filehash)
+
+    ## Printing Result to console
+    print("Temp: ",current_temperature," and Humidtity: ",current_humidity," set at: ", str(datetime.datetime.now()))
 
     ## Sleep for the required time
     time.sleep(time_recheck_reading)

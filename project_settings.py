@@ -5,7 +5,14 @@ smart_contract_address = "0xab0e8bda0aa2b653e7f20f96261db5ef45afa6b7"
 eth_blockchain_url = "http://localhost:8042"
 abi_filename = "abi/contract_abi.json"
 
+## eth-swarm data
+swarm_blockchain_url = "http://localhost:8500/bzz:/"
+device_type = "Raspberry PI 3B+"
+producer_device_id = "IoTProducer1"
+consumer_device_id = "IoTConsumer1"
+
 ## IOT sensor values
+sensor_type = "DHT11"
 dht_version = 11
 time_recheck_reading = 60
 dht_GPIO = 4
