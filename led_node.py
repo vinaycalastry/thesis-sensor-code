@@ -4,6 +4,8 @@ import os
 import datetime
 import time
 import project_settings
+import requests
+import json
 
 ## Custom modules
 from interfacer_modules.blockchain.smartcontract import SmartContractCaller

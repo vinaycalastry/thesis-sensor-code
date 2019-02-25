@@ -4,6 +4,8 @@ import os
 import datetime
 import time
 import project_settings
+import requests
+import json
 
 ## Custom modules
 from interfacer_modules.blockchain.smartcontract import SmartContractCaller
@@ -38,14 +40,26 @@ def celsius_to_fahrenheit(temperature):
 
 while True:
     try:    
-        call_get_fn = smart_contract_instance.get_tempandhumidity_latest()
-        temp, humidity = call_get_fn[0], call_get_fn[1] # temp in celsius
-        temp_in_f = celsius_to_fahrenheit(temp)
-        time_captured = call_get_fn[2]
+        ## Get filehash from swarm
+        filehash_swarm = smart_contract_instance.get_filehash_latest()
+
+        ## Get payload stored in filehash from swarm
+        res = requests.get(project_settings.swarm_blockchain_url+filehash_swarm+"/")
+        payload_res = json.loads(res.text)
+
+        ## Get the temperature, hulidity and timestamp stored
+        temp_in_f = celsius_to_fahrenheit(payload_res.Temperature)
+        humidity = payload_res.Humidity
+        time_captured = payload_res.Timestamp
+
+        ## Display results in the LCD
         lcd_sensor_instance.lcd_clear() 
         lcd_sensor_instance.lcd_display_string("Temp: "+temp_in_f+"F", project_settings.TEMP_DISPLAY, project_settings.OFFSET)
         lcd_sensor_instance.lcd_display_string("Humidity: "+humidity+"%", project_settings.HUMIDITY_DISPLAY, project_settings.OFFSET)
+
+        ## Sleep and restart
         time.sleep(time_recheck_reading)
+
     except KeyboardInterrupt:
         lcd_sensor_instance.lcd_clear()
         lcd_sensor_instance.lcd_display_string("Closed")
