@@ -73,7 +73,7 @@ while True:
     swarm_store = create_payload(current_temperature, current_humidity)
 
     ## Send POST request to swarm to store the payload
-    r = requests.post(project_settings.swarm_blockchain_url,data=swarm_store , headers={'Content-Type': 'text/plain'})
+    r = requests.post(project_settings.swarm_blockchain_url, data=swarm_store, headers={'Content-Type': 'text/plain'})
 
     ## Store the received filehash for swarm
     filehash = r.text

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 ## blockchain url and addresses
-smart_contract_address = "0xe0c7b5a13571c193e2c82f038878b4cf9812be6c"
+smart_contract_address = "0x79d2912d0dc2fd0e531e2de0ada05119ceed29ce"
 eth_blockchain_url = "http://localhost:8042"
 abi_filename = "abi/contract_abi.json"
 
