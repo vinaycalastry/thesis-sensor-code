@@ -63,5 +63,4 @@ while True:
     except KeyboardInterrupt:
         lcd_sensor_instance.lcd_clear()
         lcd_sensor_instance.lcd_display_string("Closed")
-        time.sleep(1)
-        lcd_sensor_instance.lcd_clear()
+
