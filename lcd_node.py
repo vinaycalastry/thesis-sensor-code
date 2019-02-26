@@ -48,9 +48,9 @@ while True:
         payload_res = json.loads(res.text)
 
         ## Get the temperature, hulidity and timestamp stored
-        temp_in_f = celsius_to_fahrenheit(payload_res.Temperature)
-        humidity = payload_res.Humidity
-        time_captured = payload_res.Timestamp
+        temp_in_f = celsius_to_fahrenheit(payload_res["Temperature"])
+        humidity = payload_res["Humidity"]
+        time_captured = payload_res["Timestamp"]
 
         ## Display results in the LCD
         lcd_sensor_instance.lcd_clear() 
