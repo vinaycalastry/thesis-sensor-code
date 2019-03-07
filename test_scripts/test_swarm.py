@@ -8,7 +8,6 @@ x = json.dumps(payload)
 r = requests.post("http://localhost:8500/bzz:/",data=x , headers={'Content-Type': 'text/plain'})
 
 filehash = r.text
-#print(filehash)
 
 res = requests.get("http://localhost:8500/bzz:/"+filehash+"/")
 
