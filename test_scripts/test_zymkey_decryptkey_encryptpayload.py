@@ -1,10 +1,11 @@
-
 ### Install pycryptodomex for this to work
 import zymkey
 import base64
 import json
 from Cryptodome.Cipher import AES
 from Cryptodome.Util.Padding import pad, unpad
+import requests
+import json
 
 with open("temp.bin") as f:
     content = f.readlines()
@@ -31,10 +32,20 @@ print("CIPHER TEXT: ")
 print(result)
 print("-------------------")
 
+## Send to swarm
+x = result
+r = requests.post("http://localhost:8500/bzz:/",data=x , headers={'Content-Type': 'text/plain'})
+
+filehash = r.text
+
+## Get the contents from swarm
+res = requests.get("http://localhost:8500/bzz:/"+filehash+"/")
+to_decode = res.text
+
 ## Decryption
 
 try:
-    b64 = json.loads(result)
+    b64 = json.loads(to_decode)
     iv_d = base64.b64decode(b64["iv"])
     ct_d = base64.b64decode(b64["ciphertext"])
     cipher_d = AES.new(secret_key_b, AES.MODE_CBC, iv_d)
@@ -42,5 +53,6 @@ try:
     print("--------------")
     print("PLAINTEXT: ")
     print("The message is authentic: ", pt.decode())
+
 except ValueError:
     print("Key is incorrect or msg is corrupted")
