@@ -44,7 +44,7 @@ storeTemp = list()
 
 
 for i in range(start_ID, current_ID):
-       
+
     ## Get filehash from swarm
     filehash_swarm = smart_contract_instance.get_filehash_id(i)
 
@@ -59,5 +59,5 @@ for i in range(start_ID, current_ID):
 
 
 
-with open('temp.out.json') as f:
+with open('temp.out.json', 'w') as f:
     json.dump(storeTemp, f)
