@@ -1,2 +1,5 @@
 __pycache__
 *.pyc
+
+#Data files to ignore
+/test_scripts/timing-scripts/data
