@@ -82,7 +82,7 @@ while True:
     smart_contract_instance.set_filehash_blockchain(filehash)
 
     ## Printing Result to console
-    print("Temp: ",current_temperature," and Humidtity: ",current_humidity," set at: ", str(datetime.datetime.now()))
+    print("Temp: ",current_temperature," and Humidity: ",current_humidity," set at: ", str(datetime.datetime.now()))
 
     ## Sleep for the required time
     time.sleep(time_recheck_reading)
