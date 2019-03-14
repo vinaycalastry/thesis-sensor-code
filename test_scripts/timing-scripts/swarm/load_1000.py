@@ -17,6 +17,6 @@ for i in total_payload:
 end = datetime.datetime.now()
 
 with open('filehashes_1000', 'w') as f:
-    f.write(filehashes)
+    f.write("\n".join(filehashes))
 
 print("SWARM: Time taken for reading: "+ len(total_payload) + " records is : "+ (end-start).seconds+ " seconds.")
