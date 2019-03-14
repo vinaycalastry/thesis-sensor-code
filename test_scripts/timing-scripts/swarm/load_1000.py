@@ -5,7 +5,9 @@ import requests
 
 total_payload = list()
 filehashes = list()
-with open('payload_1000.json', 'r') as f:
+filedir = "/home/pi/vinay/test-payload/"
+
+with open(filedir + 'payload_1000.json', 'r') as f:
     total_payload = json.load(f)
 
 start = datetime.datetime.now()
@@ -19,4 +21,6 @@ end = datetime.datetime.now()
 with open('filehashes_1000', 'w') as f:
     f.write("\n".join(filehashes))
 
-print("SWARM: Time taken for reading: "+ len(total_payload) + " records is : "+ (end-start).seconds+ " seconds.")
+total_time = str((end-start).seconds)
+
+print("SWARM: Time taken for reading: "+ str(len(total_payload)) + " records is : "+total_time+ " seconds.")
