@@ -61,14 +61,17 @@ csv_dir = "/home/pi/vinay/test-data/"
 with open(csv_dir+csv_file, "w") as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
     writer.writeheader()
-    while True:
-        ## Get readings
-        current_temperature, current_humidity = dht11_sensor_instance.get_dht_readings()
 
-        payload = create_payload(current_temperature, current_humidity)
+while True:
+    ## Get readings
+    current_temperature, current_humidity = dht11_sensor_instance.get_dht_readings()
 
+    payload = create_payload(current_temperature, current_humidity)
+
+    with open(csv_dir+csv_file, "a") as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
         writer.writerow(payload)
-        print("Row written:", payload)
-        sys.stdout.flush()
-        ## Sleep for the required time
-        time.sleep(time_recheck_reading)
+    
+    print("Row written:", payload)
+    ## Sleep for the required time
+    time.sleep(time_recheck_reading)
