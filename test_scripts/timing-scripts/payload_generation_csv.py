@@ -3,7 +3,7 @@
 import os
 ## To import from interfacer_modules which is one directory above
 import sys
-sys.path.append("..")
+sys.path.append("../..")
 
 import datetime
 import json
@@ -55,9 +55,10 @@ dht11_sensor_instance = DHT11sensor(dht_version, dht_GPIO)
 
 csv_columns = ["Temperature", "Humidity", "TemperatureUnits", "HumidityUnits", "Timestamp", "DeviceType", "DeviceID", "DeviceIP", "SensorType"]
 csv_file = "Dataset_dht11readings.csv"
+csv_dir = "/home/pi/vinay/test-data/"
 
 #Write to csv file
-with open(csv_file, "w") as csvfile:
+with open(csv_dir+csv_file, "w") as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
     writer.writeheader()
     while True:
