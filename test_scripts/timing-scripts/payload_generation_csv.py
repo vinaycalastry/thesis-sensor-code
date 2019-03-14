@@ -40,7 +40,7 @@ def create_payload(temperature, humidity):
         "Timestamp": current_time,
         "DeviceType": "Raspberry Pi 3B+",
         "DeviceID": "IoTProducer1",
-        "DeviceIP": "192.168.0.16",
+        "DeviceIP": "192.168.0.14",
         "SensorType": "DHT11"
     }
     return payload
