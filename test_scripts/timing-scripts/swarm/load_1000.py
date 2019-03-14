@@ -10,13 +10,12 @@ with open('payload_1000.json', 'r') as f:
 
 start = datetime.datetime.now()
 for i in total_payload:
-    x = json.dumps(i)
-    r = requests.post("http://localhost:8500/bzz:/",data=x , headers={'Content-Type': 'text/plain'})
-    filehashes.append(r.text)
+    res = requests.get("http://localhost:8500/bzz:/"+i+"/")
+    total_payload.append(res.text)
 
 end = datetime.datetime.now()
 
 with open('filehashes_1000', 'w') as f:
     f.write(filehashes)
 
-print("Time taken for loading: "+ len(total_payload) + " records is : "+ (end-start).seconds+ " seconds.")
+print("SWARM: Time taken for reading: "+ len(total_payload) + " records is : "+ (end-start).seconds+ " seconds.")
