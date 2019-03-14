@@ -8,7 +8,7 @@ filehashes = list()
 filedir = "/home/pi/vinay/test-payload/"
 
 #Load test file data to python object
-with open(filedir + 'payload_1000.json', 'r') as f:
+with open(filedir + 'payload_100K.json', 'r') as f:
     total_payload = json.load(f)
 
 #START TEST
@@ -21,7 +21,7 @@ for i in total_payload:
 end = datetime.datetime.now()
 
 #SAVE FILEHASH for TESTING READ
-with open('filehashes_1000', 'w') as f:
+with open('filehashes_100K', 'w') as f:
     f.write("\n".join(filehashes))
 
 #Calculate total time taken

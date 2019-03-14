@@ -6,7 +6,7 @@ import requests
 total_payload = list()
 
 #Store payload data from test file to python object
-with open('filehashes_1000', 'r') as f:
+with open('filehashes_1M', 'r') as f:
     filehashes = f.readlines()
 
 #Convert string to list
