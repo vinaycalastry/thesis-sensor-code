@@ -68,6 +68,7 @@ with open(csv_dir+csv_file, "w") as csvfile:
         payload = create_payload(current_temperature, current_humidity)
 
         writer.writerow(payload)
+        print("Row written:", payload)
 
         ## Sleep for the required time
         time.sleep(time_recheck_reading)
