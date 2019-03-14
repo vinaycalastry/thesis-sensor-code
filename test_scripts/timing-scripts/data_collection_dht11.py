@@ -69,6 +69,6 @@ with open(csv_dir+csv_file, "w") as csvfile:
 
         writer.writerow(payload)
         print("Row written:", payload)
-
+        sys.stdout.flush()
         ## Sleep for the required time
         time.sleep(time_recheck_reading)
