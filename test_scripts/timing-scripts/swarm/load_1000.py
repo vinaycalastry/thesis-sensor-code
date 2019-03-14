@@ -1,4 +1,4 @@
-#/usr/bin/python3
+#!/usr/bin/python3
 import json
 import datetime
 import requests
@@ -10,8 +10,9 @@ with open('payload_1000.json', 'r') as f:
 
 start = datetime.datetime.now()
 for i in total_payload:
-    res = requests.get("http://localhost:8500/bzz:/"+i+"/")
-    total_payload.append(res.text)
+    x = json.dumps(i)
+    r = requests.post("http://localhost:8500/bzz:/",data=x , headers={'Content-Type': 'text/plain'})
+    filehashes.append(r.text)
 
 end = datetime.datetime.now()
 
