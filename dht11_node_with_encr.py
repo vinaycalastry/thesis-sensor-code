@@ -6,6 +6,10 @@ import time
 import project_settings
 import requests
 import json
+import zymkey
+import base64
+from Cryptodome.Cipher import AES
+from Cryptodome.Util.Padding import pad, unpad
 
 ## Custom modules
 from interfacer_modules.blockchain.smartcontract import SmartContractCaller
@@ -32,6 +36,14 @@ smart_contract_instance.create_smartcontract_obj()
 
 ## DHT11 sensor init
 dht11_sensor_instance = DHT11sensor(dht_version, dht_GPIO)
+
+## Read the encrypted secret key
+with open("temp.bin") as f:
+    content = f.readlines()
+
+## Store secret key for the duration of the session
+secret_key = zymkey.client.unlock(base64.b64decode(content[0]))
+secret_key_b = bytes(secret_key.decode("utf-8"), "utf-8")
 
 ## Create payload to store in swarm
 def create_payload(temperature, humidity):
@@ -72,8 +84,18 @@ while True:
     ## Create a payload tot store in Swarm
     swarm_store = create_payload(current_temperature, current_humidity)
 
+    ## Convert payload to bytes
+    payload_str = bytes(swarm_store, "utf-8")
+
+    ## Encrypt payload with AES
+    cipher = AES.new(secret_key_b, AES.MODE_CBC)
+    ct_bytes = cipher.encrypt(pad(payload_str, AES.block_size))
+    iv = base64.b64encode(cipher.iv).decode("utf-8")
+    ct = base64.b64encode(ct_bytes).decode("utf-8")
+    result = json.dumps({ "iv": iv, "ciphertext": ct})
+
     ## Send POST request to swarm to store the payload
-    r = requests.post(project_settings.swarm_blockchain_url, data=swarm_store, headers={'Content-Type': 'text/plain'})
+    r = requests.post(project_settings.swarm_blockchain_url, data=result, headers={'Content-Type': 'text/plain'})
 
     ## Store the received filehash for swarm
     filehash = r.text
