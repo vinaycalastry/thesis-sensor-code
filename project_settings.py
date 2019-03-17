@@ -15,7 +15,7 @@ consumer_device_id = "IoTConsumer1"
 sensor_type = "DHT11"
 dht_version = 11
 time_recheck_reading = 60
-dht_GPIO = 4
+dht_GPIO = 22
 
 ## LCD settings
 I2CBUS = 1  # 0 for rpi1, 1 for later
