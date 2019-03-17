@@ -7,12 +7,9 @@ from Cryptodome.Util.Padding import pad, unpad
 import requests
 import json
 
-with open("temp.bin") as f:
-    content = f.readlines()
+content = bytearray(open("zymkey_protected_secret.dat", mode="rb").read())
 
-secret_key = zymkey.client.unlock(base64.b64decode(content[0]))
-
-#secret_key_str = secret_key.decode()
+secret_key = zymkey.client.unlock(base64.b64decode(content))
 secret_key_b = bytes(secret_key.decode("utf-8"), "utf-8")
 
 payload = {"temp": "23C", "humidity": "80%"}
