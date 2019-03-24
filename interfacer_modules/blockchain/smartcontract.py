@@ -34,18 +34,19 @@ class SmartContractCaller:
 
 
 
-    ##function to send temp and humidity to blockchain
+    ## DEPRECATED function to send temp and humidity to blockchain
     def set_tempandhumidity_blockchain(self, temp, humidity, dataStorageTime):
         set_fn_txn_hash = self.sensor_contract.functions.setSensorData(temp, humidity, dataStorageTime).transact({"from":self.executor_address})
         res = self.w3.eth.waitForTransactionReceipt(set_fn_txn_hash)
         return res
 
-    ## function to get the current temp and humidity
+    ## DEPRECATED function to get the current temp and humidity
     def get_tempandhumidity_latest(self):
         temp_and_humidity = self.sensor_contract.functions.getSensorDataLatest().call({"from":self.executor_address})
 
         return temp_and_humidity
 
+    ## DEPRECATED function to get the current temp and humidity from ID
     def get_tempandhumidity_fromID(self, ID):
         temp_and_humidity = self.sensor_contract.functions.getSensorDataByID(ID).call({"from":self.executor_address})
 
