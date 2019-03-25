@@ -9,8 +9,6 @@ import json
 
 ## Custom modules
 from interfacer_modules.blockchain.smartcontract import SmartContractCaller
-from interfacer_modules.sensors import I2C_LCD_driver
-
 
 ## blockchain url and addresses
 smart_contract_address = project_settings.smart_contract_address
@@ -28,17 +26,15 @@ smart_contract_instance.load_abi(abi_filename)
 ## Create a smart contract obj to use
 smart_contract_instance.create_smartcontract_obj()
 
-## LCD sensor init
-lcd_sensor_instance = I2C_LCD_driver.lcd()
-
-# Helper functions to convert c to f and f to c
+## Helper functions to convert f to c and c to f
 def fahrenheit_to_celsius(temperature):
     return round((temperature * 9/5) + 32)
 
 def celsius_to_fahrenheit(temperature):
     return round(temperature * 1.8 + 32)
 
-
+print("Latest Readings: ")
+## Run indefinitely
 while True:
     try:    
         ## Get filehash from swarm
@@ -53,15 +49,14 @@ while True:
         humidity = payload_res["Humidity"]
         time_captured = payload_res["Timestamp"]
 
-        ## Display results in the LCD
-        lcd_sensor_instance.lcd_clear() 
-        lcd_sensor_instance.lcd_display_string("Temp: "+str(temp_in_f)+"F", project_settings.TEMP_DISPLAY, project_settings.OFFSET)
-        lcd_sensor_instance.lcd_display_string("Humidity: "+str(humidity)+"%", project_settings.HUMIDITY_DISPLAY, project_settings.OFFSET)
+        ## Print to console
+        print("Temperature: ", str(temp_in_f), " - Humidity: "+ str(humidity)+ " - Timestamp: "+time_captured)      
+        #print(payload_final)
 
         ## Sleep and restart
         time.sleep(time_recheck_reading)
 
     except KeyboardInterrupt:
-        lcd_sensor_instance.lcd_clear()
-        lcd_sensor_instance.lcd_display_string("Closed")
+        print("Closed by user")
+        break
 
