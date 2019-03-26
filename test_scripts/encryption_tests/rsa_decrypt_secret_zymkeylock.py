@@ -5,7 +5,7 @@ import zymkey
 import base64
 import sys
 
-# pass the ciphertext as argument to script
+# pass the ciphertext file as argument to script
 ciphertext = open(sys.argv[1]).read()
 
 #Decrypt secret key with RSA private key

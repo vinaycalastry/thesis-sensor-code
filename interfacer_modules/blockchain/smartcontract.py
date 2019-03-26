@@ -33,7 +33,6 @@ class SmartContractCaller:
         self.sensor_contract = self.w3.eth.contract(address=self.chk_smart_contract_address, abi=self.abi_)
 
 
-
     ## DEPRECATED function to send temp and humidity to blockchain
     def set_tempandhumidity_blockchain(self, temp, humidity, dataStorageTime):
         set_fn_txn_hash = self.sensor_contract.functions.setSensorData(temp, humidity, dataStorageTime).transact({"from":self.executor_address})
@@ -72,3 +71,14 @@ class SmartContractCaller:
     def get_current_BCID(self):
         req_id = self.sensor_contract.functions.getCurrentID().call({"from":self.executor_address})
         return req_id
+
+    ## Owner only Functions
+    ## Register the IoT device
+    def register_device(self, address_to_register):
+        result = self.sensor_contract.functions.registerDevice(address_to_register).transact({"from":self.executor_address})
+        return result
+
+    ## De-Register the IoT device
+    def deregister_device(self, address_to_deregister):
+        result = self.sensor_contract.functions.deregisterDevice(address_to_deregister).transact({"from":self.executor_address})
+        return result
