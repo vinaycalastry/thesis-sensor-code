@@ -5,6 +5,8 @@ import os
 import sys
 sys.path.append("..")
 
+from web3 import Web3
+
 ## Custom modules
 from interfacer_modules.blockchain.smartcontract import SmartContractCaller
 import project_settings
@@ -25,11 +27,11 @@ smart_contract_instance.create_smartcontract_obj()
 
 ## Enter the address to register in contract
 print("Enter address to register in Smart Contract:")
-address_to_register = input()
+address_to_register = Web3.toChecksumAddress(input())
 
 res = smart_contract_instance.register_device(address_to_register)
 
-if (res == "INFO:REGISTRATION_SUCCESSFUL"):
-    print("Device registered successfully")
+if res == True:
+    print("Success")
 else:
-    print("Error occurred, Try again")
+    print("Fail")

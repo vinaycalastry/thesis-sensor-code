@@ -5,6 +5,8 @@ import os
 import sys
 sys.path.append("..")
 
+from web3 import Web3
+
 ## Custom modules
 from interfacer_modules.blockchain.smartcontract import SmartContractCaller
 import project_settings
@@ -25,11 +27,11 @@ smart_contract_instance.create_smartcontract_obj()
 
 ## Enter the address to register in contract
 print("Enter address to register in Smart Contract:")
-address_to_deregister = input()
+address_to_deregister = Web3.toChecksumAddress(input())
 
 res = smart_contract_instance.deregister_device(address_to_deregister)
 
-if (res == "INFO:DEREGISTRATION_SUCCESSFUL"):
-    print("Device de-registered successfully")
+if res == False:
+    print("Success")
 else:
-    print("Error occurred, Try again")
+    print("Fail")

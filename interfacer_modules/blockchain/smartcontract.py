@@ -75,10 +75,12 @@ class SmartContractCaller:
     ## Owner only Functions
     ## Register the IoT device
     def register_device(self, address_to_register):
-        result = self.sensor_contract.functions.registerDevice(address_to_register).transact({"from":self.executor_address})
-        return result
+        res_file_hash = self.sensor_contract.functions.registerDevice(address_to_register).transact({"from":self.executor_address})
+        result = self.w3.eth.waitForTransactionReceipt(res_file_hash)
+        return self.sensor_contract.functions.devicePresent(address_to_register).call({"from":self.executor_address})
 
     ## De-Register the IoT device
     def deregister_device(self, address_to_deregister):
-        result = self.sensor_contract.functions.deregisterDevice(address_to_deregister).transact({"from":self.executor_address})
-        return result
+        res_file_hash = self.sensor_contract.functions.deregisterDevice(address_to_deregister).transact({"from":self.executor_address})
+        result = self.w3.eth.waitForTransactionReceipt(res_file_hash)
+        return self.sensor_contract.functions.devicePresent(address_to_deregister).call({"from":self.executor_address})
