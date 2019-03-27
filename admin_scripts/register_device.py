@@ -30,11 +30,11 @@ print("Enter address to register in Smart Contract:")
 address_to_register = Web3.toChecksumAddress(input())
 
 res = smart_contract_instance.register_device(address_to_register)
-print(res)
-
+#print(res)
+print()
 if res["_message"] == "SUCESSFULLY REGISTERED":
-    print("Successfully added new device")
+    print("INFO: Successfully added new device")
 elif res["_message"] == "DEVICE ALREADY REGISTERED":
-    print("Device was already registered")
+    print("ERROR: Device was already registered")
 else:
-    print("Failed to register device")
+    print("ERROR: Failed to register device")

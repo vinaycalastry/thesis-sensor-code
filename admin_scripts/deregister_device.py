@@ -30,10 +30,10 @@ print("Enter address to register in Smart Contract:")
 address_to_deregister = Web3.toChecksumAddress(input())
 
 res = smart_contract_instance.deregister_device(address_to_deregister)
-
+print()
 if res["_message"] == "SUCESSFULLY DEREGISTERED":
-    print("Successfully removed the device")
+    print("INFO: Successfully removed the device")
 elif res["_message"] == "DEVICE NOT REGISTERED":
-    print("Device was already registered")
+    print("ERROR: Device was already deregistered")
 else:
-    print("Failed to register device")
+    print("ERROR: Failed to register device")
