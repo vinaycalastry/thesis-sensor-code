@@ -84,3 +84,4 @@ class SmartContractCaller:
         res_file_hash = self.sensor_contract.functions.deregisterDevice(address_to_deregister).transact({"from":self.executor_address})
         result = self.w3.eth.waitForTransactionReceipt(res_file_hash)
         return self.sensor_contract.functions.devicePresent(address_to_deregister).call({"from":self.executor_address})
+    

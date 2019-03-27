@@ -32,6 +32,6 @@ address_to_deregister = Web3.toChecksumAddress(input())
 res = smart_contract_instance.deregister_device(address_to_deregister)
 
 if res == False:
-    print("Success")
+    print("Successfully de-registered device")
 else:
-    print("Fail")
+    print("Failed to de-register device")

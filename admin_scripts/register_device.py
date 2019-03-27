@@ -32,6 +32,6 @@ address_to_register = Web3.toChecksumAddress(input())
 res = smart_contract_instance.register_device(address_to_register)
 
 if res == True:
-    print("Success")
+    print("Successfully added new device")
 else:
-    print("Fail")
+    print("Failed to register device")
