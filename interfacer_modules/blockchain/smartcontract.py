@@ -54,8 +54,9 @@ class SmartContractCaller:
     ## function to save swarm filehash to blockchain
     def set_filehash_blockchain(self, filehash):
         set_fn_txn_hash = self.sensor_contract.functions.setSensorData(filehash).transact({"from":self.executor_address})
-        res = self.w3.eth.waitForTransactionReceipt(set_fn_txn_hash)
-        return res
+        tx_receipt = self.w3.eth.getTransactionReceipt(set_fn_txn_hash)
+        result = self.sensor_contract.events.setFileHashEvent().processReceipt(tx_receipt)
+        return res[0]['args']
 
     ## function to get latest swarm filehash
     def get_filehash_latest(self):
@@ -75,13 +76,15 @@ class SmartContractCaller:
     ## Owner only Functions
     ## Register the IoT device
     def register_device(self, address_to_register):
-        res_file_hash = self.sensor_contract.functions.registerDevice(address_to_register).transact({"from":self.executor_address})
-        result = self.w3.eth.waitForTransactionReceipt(res_file_hash)
-        return self.sensor_contract.functions.devicePresent(address_to_register).call({"from":self.executor_address})
+        res_hash = self.sensor_contract.functions.registerDevice(address_to_register).transact({"from":self.executor_address})
+        tx_receipt = self.w3.eth.getTransactionReceipt(res_hash)
+        result = self.sensor_contract.events.deviceEvent().processReceipt(tx_receipt)
+        return res[0]['args']
 
     ## De-Register the IoT device
     def deregister_device(self, address_to_deregister):
-        res_file_hash = self.sensor_contract.functions.deregisterDevice(address_to_deregister).transact({"from":self.executor_address})
-        result = self.w3.eth.waitForTransactionReceipt(res_file_hash)
-        return self.sensor_contract.functions.devicePresent(address_to_deregister).call({"from":self.executor_address})
+        res_hash = self.sensor_contract.functions.deregisterDevice(address_to_deregister).transact({"from":self.executor_address})
+        tx_receipt = self.w3.eth.getTransactionReceipt(res_hash)
+        result = self.sensor_contract.events.deviceEvent().processReceipt(tx_receipt)
+        return res[0]['args']
     
