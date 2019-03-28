@@ -11,7 +11,7 @@ time_taken_dict = {}
 
 print("BEGIN SWARM TEST")
 #Load test file data to python object
-with open(filedir + 'payload_10K.json', 'r') as f:
+with open(filedir + 'payload_10k.json', 'r') as f:
     total_payload = json.load(f)
 print("LOAD TEST DATA")
 
