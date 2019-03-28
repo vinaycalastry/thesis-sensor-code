@@ -45,9 +45,9 @@ total_payload_10k = []
 for i in range(generate_size[1]):
     temp = random.randint(8,49)
     humi = random.randint(20,81)
-    total_payload_1000.append(create_payload(temp, humi))
+    total_payload_10k.append(create_payload(temp, humi))
 
-with open('payload_1000.json', 'w') as f:
+with open('payload_10k.json', 'w') as f:
     json.dump(total_payload_10k, f)
 
 # #file_100k
