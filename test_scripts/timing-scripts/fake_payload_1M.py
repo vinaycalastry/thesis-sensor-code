@@ -3,7 +3,7 @@ import datetime
 import json
 import random
 
-generate_size = [1000, 100000, 1000000]
+generate_size = [1000, 10000, 100000, 1000000]
 
 ## Create payload to store in swarm
 def create_payload(temperature, humidity):
@@ -40,30 +40,30 @@ def create_payload(temperature, humidity):
 total_payload_1000 = []
 total_payload_100k = []
 total_payload_1M = []
-
+total_payload_10k = []
 #file_1000
-for i in range(generate_size[0]):
+for i in range(generate_size[1]):
     temp = random.randint(8,49)
     humi = random.randint(20,81)
     total_payload_1000.append(create_payload(temp, humi))
 
 with open('payload_1000.json', 'w') as f:
-    json.dump(total_payload_1000, f)
+    json.dump(total_payload_10k, f)
 
-#file_100k
-for i in range(generate_size[1]):
-    temp = random.randint(8,49)
-    humi = random.randint(20,81)
-    total_payload_100k.append(create_payload(temp, humi))
+# #file_100k
+# for i in range(generate_size[1]):
+#     temp = random.randint(8,49)
+#     humi = random.randint(20,81)
+#     total_payload_100k.append(create_payload(temp, humi))
 
-with open('payload_100k.json', 'w') as f:
-    json.dump(total_payload_100k, f)
+# with open('payload_100k.json', 'w') as f:
+#     json.dump(total_payload_100k, f)
 
-#file_1M
-for i in range(generate_size[2]):
-    temp = random.randint(8,49)
-    humi = random.randint(20,81)
-    total_payload_1M.append(create_payload(temp, humi))
+# #file_1M
+# for i in range(generate_size[2]):
+#     temp = random.randint(8,49)
+#     humi = random.randint(20,81)
+#     total_payload_1M.append(create_payload(temp, humi))
 
-with open('payload_1M.json', 'w') as f:
-    json.dump(total_payload_1M, f)
+# with open('payload_1M.json', 'w') as f:
+#     json.dump(total_payload_1M, f)

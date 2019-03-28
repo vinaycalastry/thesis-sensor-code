@@ -4,12 +4,12 @@ import datetime
 import requests
 
 total_payload = list()
-benchmark_steps = [10, 100, 1000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]
+benchmark_steps = [10, 100, 250, 500, 750, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]
 time_taken_dict = {}
 
 print("BEGIN SWARM TEST")
 #Store payload data from test file to python object
-with open('filehashes_100K', 'r') as f:
+with open('filehashes_10K', 'r') as f:
     filehashes = f.readlines()
 
 print("FILE HASHES LOADED")
@@ -28,6 +28,7 @@ for i in filehashes:
     if counter in benchmark_steps:
         end = datetime.datetime.now()
         time_taken_dict[counter] = str((end-start).seconds)
+        print(str(counter) + " - " + time_taken_dict[counter])
 print("END COUNTING TIME")
 
 #Dictionary to save times taken for loading

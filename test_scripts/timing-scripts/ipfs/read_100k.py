@@ -12,7 +12,7 @@ api = ipfsapi.connect('127.0.0.1', 5001)
 
 print("BEGIN IPFS TEST")
 #Store payload data from test file to python object
-with open('filehashes_100K', 'r') as f:
+with open('filehashes_100k', 'r') as f:
     filehashes = f.readlines()
 
 print("FILE HASHES LOADED")

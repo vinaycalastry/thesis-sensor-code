@@ -6,18 +6,19 @@ import requests
 total_payload = list()
 filehashes = list()
 filedir = "/home/pi/vinay/test-payload/"
-benchmark_steps = [10, 100, 1000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]
+benchmark_steps = [10, 100, 250, 500, 750, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]
 time_taken_dict = {}
 
 print("BEGIN SWARM TEST")
 #Load test file data to python object
-with open(filedir + 'payload_100K.json', 'r') as f:
+with open(filedir + 'payload_10K.json', 'r') as f:
     total_payload = json.load(f)
 print("LOAD TEST DATA")
 
 counter = 0
 #START TEST
 print("BEGIN COUNTING TIME")
+print("RECORDS - TIME")
 start = datetime.datetime.now()
 for i in total_payload:
     x = json.dumps(i)
@@ -28,12 +29,14 @@ for i in total_payload:
     if counter in benchmark_steps:
         end = datetime.datetime.now()
         time_taken_dict[counter] = str((end-start).seconds)
+        print(str(counter) + " - " + time_taken_dict[counter])
+        
 #END TEST
 print("END COUNTING TIME")
 
 print("WRITE FILE FOR READ TEST")
 #SAVE FILEHASH for TESTING READ
-with open('filehashes_100K', 'w') as f:
+with open('filehashes_10K', 'w') as f:
     f.write("\n".join(filehashes))
 
 

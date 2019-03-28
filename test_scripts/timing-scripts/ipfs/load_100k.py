@@ -12,7 +12,7 @@ api = ipfsapi.connect('127.0.0.1', 5001)
 
 print("BEGIN IPFS TEST")
 #Load test file data to python object
-with open(filedir + 'payload_100K.json', 'r') as f:
+with open(filedir + 'payload_100k.json', 'r') as f:
     total_payload = json.load(f)
 print("LOAD TEST DATA")
 
