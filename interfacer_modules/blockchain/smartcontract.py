@@ -58,6 +58,10 @@ class SmartContractCaller:
         result = self.sensor_contract.events.setFileHashEvent().processReceipt(tx_receipt)
         return result[0]['args']
 
+    ## function to save swarm filehash to blockchain. This sends only txn, doesnt wait for receipt
+    def set_filehash_blockchain_test(self, filehash):
+        set_fn_txn_hash = self.sensor_contract.functions.setSensorData(filehash).transact({"from":self.executor_address})
+
     ## function to get latest swarm filehash
     def get_filehash_latest(self):
         filehash = self.sensor_contract.functions.getSensorDataLatest().call({"from":self.executor_address})

@@ -5,14 +5,14 @@ import requests
 import ipfsapi
 
 total_payload = list()
-benchmark_steps = [10, 100, 1000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]
+benchmark_steps = [10, 100, 250, 500, 750, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]
 time_taken_dict = {}
 
 api = ipfsapi.connect('127.0.0.1', 5001)
 
 print("BEGIN IPFS TEST")
 #Store payload data from test file to python object
-with open('filehashes_100k', 'r') as f:
+with open('filehashes_10K', 'r') as f:
     filehashes = f.readlines()
 
 print("FILE HASHES LOADED")
