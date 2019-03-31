@@ -6,7 +6,6 @@ from Cryptodome.Util.number import long_to_bytes
 import base64
 import hashlib
 import hmac
-import json
 
 # Size of hmac key
 SIG_SIZE = hashlib.sha256().digest_size
@@ -28,7 +27,12 @@ cipher = PKCS1_OAEP.new(key)
 aes_cipher = cipher.encrypt(aes_key)
 hmac_cipher = cipher.encrypt(hmac_key)
 
-#Send cipher to file
+#Send rsa cipher to file
 encrypted_f = open("rsa_ciphertext.dat", mode='wb')
-encrypted_f.write(base64.b64encode(json.dumps({"aes_cipher": aes_cipher, "hmac_cipher": hmac_cipher})))
+encrypted_f.write(base64.b64encode(aes_cipher))
 encrypted_f.close()
+
+#Send hmac cipher to file
+encrypted_sf = open("hmac_ciphertext.dat", mode='wb')
+encrypted_sf.write(base64.b64encode(hmac_cipher))
+encrypted_sf.close()
