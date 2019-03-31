@@ -4,6 +4,7 @@ from Cryptodome.PublicKey import RSA
 import zymkey
 import base64
 import sys
+import json
 
 # pass the ciphertext file as argument to script
 ciphertext = open(sys.argv[1]).read()
@@ -22,7 +23,9 @@ encrypted_f.close()
 content = bytearray(open("zymkey_protected_secret.dat", mode="rb").read())
 
 print(content)
-secret_key = zymkey.client.unlock(base64.b64decode(content))
+secret_keys = zymkey.client.unlock(base64.b64decode(content))
 
-print(secret_key.decode("utf-8"))
-secret_key_b = bytes(secret_key.decode("utf-8"), "utf-8")
+print(json.loads(secret_keys))
+
+#print(secret_key.decode("utf-8"))
+#secret_key_b = bytes(secret_key.decode("utf-8"), "utf-8")
