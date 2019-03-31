@@ -33,14 +33,16 @@ content_aes = bytearray(open("zymkey_protected_secret_aes.dat", mode="rb").read(
 print("Locked AES key: ")
 print(content_aes)
 secret_key_aes = zymkey.client.unlock(base64.b64decode(content_aes))
-print("AES key: "+secret_key_aes)
+print("AES key: ")
+print(secret_key_aes)
 
 # hmac key in locked form, unlock for test
 content_hmac = bytearray(open("zymkey_protected_secret_hmac.dat", mode="rb").read())
 print("Locked HMAC key: ")
 print(content_hmac)
 secret_key_hmac = zymkey.client.unlock(base64.b64decode(content_hmac))
-
+print("HMAC key: ")
+print(secret_key_hmac)
 
 
 #print(secret_key.decode("utf-8"))
