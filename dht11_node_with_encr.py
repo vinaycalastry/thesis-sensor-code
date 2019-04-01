@@ -38,12 +38,11 @@ smart_contract_instance.create_smartcontract_obj()
 dht11_sensor_instance = DHT11sensor(dht_version, dht_GPIO)
 
 ## Read the encrypted secret key
-with open("temp.bin") as f:
-    content = f.readlines()
+content = bytearray(open("zymkey_protected_secret_aes.dat", mode="rb").read())
 
 ## Store secret key for the duration of the session
-secret_key = zymkey.client.unlock(base64.b64decode(content[0]))
-secret_key_b = bytes(secret_key.decode("utf-8"), "utf-8")
+secret_key = zymkey.client.unlock(base64.b64decode(content))
+secret_key_b = bytearray(secret_key)
 
 ## Create payload to store in swarm
 def create_payload(temperature, humidity):

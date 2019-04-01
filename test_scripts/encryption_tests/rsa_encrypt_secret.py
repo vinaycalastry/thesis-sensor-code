@@ -15,8 +15,8 @@ def get_random_bytes(amount):
     return long_to_bytes(random.getrandbits(amount * 8))
 
 #Encrypt secret key with RSA public key
-aes_key = get_random_bytes(AES.block_size)
-hmac_key = get_random_bytes(SIG_SIZE)
+aes_key = get_random_bytes(AES.block_size) #lock it after first time
+hmac_key = get_random_bytes(SIG_SIZE) #lock it after first time
 
 print("Randome keys generated: AES, hmac")
 print(aes_key)
