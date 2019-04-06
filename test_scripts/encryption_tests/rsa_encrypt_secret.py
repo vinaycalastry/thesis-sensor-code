@@ -30,7 +30,7 @@ producer_hmac_cipher = cipher_p.encrypt(hmac_key)
 
 # Cipher and Key for Consumer
 key_c = RSA.importKey(open('consumer_public_key.pem').read())
-cipher_c = PKCS1_OAEP.new(key_p)
+cipher_c = PKCS1_OAEP.new(key_c)
 consumer_aes_cipher = cipher_c.encrypt(aes_key)
 consumer_hmac_cipher = cipher_c.encrypt(hmac_key)
 
