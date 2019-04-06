@@ -56,9 +56,6 @@ def fahrenheit_to_celsius(temperature):
 def celsius_to_fahrenheit(temperature):
     return round(temperature * 1.8 + 32)
 
-## Read the encrypted secret key
-with open("temp.bin") as f:
-    content = f.readlines()
 
 ## Open aes key data
 content = bytearray(open("zymkey_protected_secret_aes.dat", mode="rb").read())

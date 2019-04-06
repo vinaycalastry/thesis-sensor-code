@@ -28,6 +28,7 @@ cipher_p = PKCS1_OAEP.new(key_p)
 producer_aes_cipher = cipher_p.encrypt(aes_key)
 producer_hmac_cipher = cipher_p.encrypt(hmac_key)
 
+# Cipher and Key for Consumer
 key_c = RSA.importKey(open('consumer_public_key.pem').read())
 cipher_c = PKCS1_OAEP.new(key_p)
 consumer_aes_cipher = cipher_c.encrypt(aes_key)
