@@ -36,7 +36,7 @@ smart_contract_instance.load_abi(abi_filename)
 smart_contract_instance.create_smartcontract_obj()
 
 ## Helper functions
-# Compare MAC signatures
+## Compare MAC signatures
 def compare_mac(mac, mac_verif):
     if len(mac) != len(mac_verif):
         print ("invalid MAC size")
