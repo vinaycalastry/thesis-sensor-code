@@ -22,17 +22,31 @@ print("Randome keys generated: AES, hmac")
 print(aes_key)
 print(hmac_key)
 
-key = RSA.importKey(open('public_key.pem').read())
-cipher = PKCS1_OAEP.new(key)
-aes_cipher = cipher.encrypt(aes_key)
-hmac_cipher = cipher.encrypt(hmac_key)
+# Cipher and Key for producer
+key_p = RSA.importKey(open('producer_public_key.pem').read())
+cipher_p = PKCS1_OAEP.new(key_p)
+producer_aes_cipher = cipher_p.encrypt(aes_key)
+producer_hmac_cipher = cipher_p.encrypt(hmac_key)
 
-#Send rsa cipher to file
-encrypted_f = open("rsa_ciphertext.dat", mode='wb')
-encrypted_f.write(base64.b64encode(aes_cipher))
-encrypted_f.close()
+key_c = RSA.importKey(open('consumer_public_key.pem').read())
+cipher_c = PKCS1_OAEP.new(key_p)
+consumer_aes_cipher = cipher_c.encrypt(aes_key)
+consumer_hmac_cipher = cipher_c.encrypt(hmac_key)
 
-#Send hmac cipher to file
-encrypted_sf = open("hmac_ciphertext.dat", mode='wb')
-encrypted_sf.write(base64.b64encode(hmac_cipher))
-encrypted_sf.close()
+#Send rsa cipher to producer file
+encrypted_p_aes = open("rsa_ciphertext_producer.dat", mode='wb')
+encrypted_p_aes.write(base64.b64encode(producer_aes_cipher))
+encrypted_p_aes.close()
+
+encrypted_p_hmac = open("hmac_ciphertext_producer.dat", mode='wb')
+encrypted_p_hmac.write(base64.b64encode(producer_hmac_cipher))
+encrypted_p_hmac.close()
+
+#Send rsa cipher to consumer file
+encrypted_c_aes = open("rsa_ciphertext_consumer.dat", mode='wb')
+encrypted_c_aes.write(base64.b64encode(consumer_aes_cipher))
+encrypted_c_aes.close()
+
+encrypted_c_hmac = open("hmac_ciphertext_consumer.dat", mode='wb')
+encrypted_c_hmac.write(base64.b64encode(consumer_hmac_cipher))
+encrypted_c_hmac.close()
