@@ -3,17 +3,22 @@
 import os
 import datetime
 import time
-import project_settings
 import requests
 import json
 import zymkey
 import base64
 from Cryptodome.Cipher import AES
 from Cryptodome.Util.Padding import pad, unpad
+import hashlib
+import hmac
+
+# Use HMAC algorithm
+HMAC_ALGO = hashlib.sha256
 
 ## Custom modules
 from interfacer_modules.blockchain.smartcontract import SmartContractCaller
 from interfacer_modules.sensors.dht11sensor import DHT11sensor
+import project_settings
 
 ## IOT sensor values
 dht_version = project_settings.dht_version
@@ -37,12 +42,15 @@ smart_contract_instance.create_smartcontract_obj()
 ## DHT11 sensor init
 dht11_sensor_instance = DHT11sensor(dht_version, dht_GPIO)
 
-## Read the encrypted secret key
+## Open aes key data
 content = bytearray(open("zymkey_protected_secret_aes.dat", mode="rb").read())
-
-## Store secret key for the duration of the session
 secret_key = zymkey.client.unlock(base64.b64decode(content))
 secret_key_b = bytearray(secret_key)
+
+## Read and Load encrypted HMAC key data
+content_hmac = bytearray(open("zymkey_protected_secret_hmac.dat", mode="rb").read())
+secret_key_hmac = zymkey.client.unlock(base64.b64decode(content_hmac))
+secret_key_hmac_b = bytearray(secret_key_hmac)
 
 ## Create payload to store in swarm
 def create_payload(temperature, humidity):
@@ -91,7 +99,14 @@ while True:
     ct_bytes = cipher.encrypt(pad(payload_str, AES.block_size))
     iv = base64.b64encode(cipher.iv).decode("utf-8")
     ct = base64.b64encode(ct_bytes).decode("utf-8")
-    result = json.dumps({ "iv": iv, "ciphertext": ct})
+
+    # Generate Signature
+    iv_data = cipher.iv + ct_bytes
+    sig = hmac.new(secret_key_hmac_b, iv_data, HMAC_ALGO).digest()
+    sig = base64.b64encode(sig).decode("utf-8")
+
+    # Save Cipher and Signature to serializable json
+    result = json.dumps({ "iv": iv, "ciphertext": ct, "signature": sig})
 
     ## Send POST request to swarm to store the payload
     r = requests.post(project_settings.swarm_blockchain_url, data=result, headers={'Content-Type': 'text/plain'})

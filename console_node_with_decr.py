@@ -3,16 +3,21 @@
 import os
 import datetime
 import time
-import project_settings
 import requests
 import json
 import zymkey
 import base64
 from Cryptodome.Cipher import AES
 from Cryptodome.Util.Padding import pad, unpad
+import hashlib
+import hmac
+
+# Use HMAC algorithm
+HMAC_ALGO = hashlib.sha256
 
 ## Custom modules
 from interfacer_modules.blockchain.smartcontract import SmartContractCaller
+import project_settings
 
 ## blockchain url and addresses
 smart_contract_address = project_settings.smart_contract_address
@@ -30,7 +35,17 @@ smart_contract_instance.load_abi(abi_filename)
 ## Create a smart contract obj to use
 smart_contract_instance.create_smartcontract_obj()
 
+## Helper functions
+# Compare MAC signatures
+def compare_mac(mac, mac_verif):
+    if len(mac) != len(mac_verif):
+        print ("invalid MAC size")
+        return False
 
+    result = 0
+    for x, y in zip(mac, mac_verif):
+        result |= x ^ y
+    return result == 0
 
 ## Helper function for degree conversion from fahrenheit to celsius
 def fahrenheit_to_celsius(temperature):
@@ -44,9 +59,15 @@ def celsius_to_fahrenheit(temperature):
 with open("temp.bin") as f:
     content = f.readlines()
 
-## Store secret key for the duration of the session
-secret_key = zymkey.client.unlock(base64.b64decode(content[0]))
-secret_key_b = bytes(secret_key.decode("utf-8"), "utf-8")
+## Open aes key data
+content = bytearray(open("zymkey_protected_secret_aes.dat", mode="rb").read())
+secret_key = zymkey.client.unlock(base64.b64decode(content))
+secret_key_b = bytearray(secret_key)
+
+## Open hmac key data
+content_hmac = bytearray(open("zymkey_protected_secret_hmac.dat", mode="rb").read())
+secret_key_hmac = zymkey.client.unlock(base64.b64decode(content_hmac))
+secret_key_hmac_b = bytearray(secret_key_hmac)
 
 while True:
     try:    
@@ -57,15 +78,26 @@ while True:
         res = requests.get(project_settings.swarm_blockchain_url+filehash_swarm+"/")
         payload_res = res.text
 
-        ## Decrypt the payload
+        ## Decrypt the payload and retrieve iv, signature and ciphertext
         b64 = json.loads(payload_res)
         iv_d = base64.b64decode(b64["iv"])
+        sig_d = base64.b64decode(b64["signature"])
         ct_d = base64.b64decode(b64["ciphertext"])
         cipher_d = AES.new(secret_key_b, AES.MODE_CBC, iv_d)
         decrypted_payload = unpad(cipher_d.decrypt(ct_d), AES.block_size)
 
+        ## Generate iv data to recreate and check signature
+        iv_data = iv_d+ct_d
+
+        ## Verify signature using MAC
+        if not compare_mac(hmac.new(secret_key_hmac_b, iv_data, HMAC_ALGO).digest(), sig_d):
+            raise ValueError
+        else:
+            pt = unpad(cipher_d.decrypt(ct_d), AES.block_size)
+            result_d = pt.decode()
+            
         ## Convert bytes array to dictionary
-        payload_final = json.loads(decrypted_payload.decode())
+        payload_final = json.loads(result_d)
 
         ## Get the temperature, hulidity and timestamp stored
         temp_in_f = celsius_to_fahrenheit(payload_final["Temperature"])
@@ -75,12 +107,15 @@ while True:
         
         ## Printing to console
         print("Temperature: ", str(temp_in_f), " - Humidity: "+ str(humidity)+ " - Timestamp: "+time_captured)      
-        #print(payload_final)
 
         ## Sleep and restart
         time.sleep(time_recheck_reading)
 
     except KeyboardInterrupt:
         print("Closed by user")
+        break
+
+    except ValueError:
+        print("Key is incorrect or msg is corrupted")
         break
 

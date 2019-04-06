@@ -92,7 +92,7 @@ try:
         result_d = pt.decode()
         print("--------------")
         print("PLAINTEXT: ")
-        print("The message is authentic: ", result)
+        print("The message is authentic: ", result_d)
 
 except ValueError:
     print("Key is incorrect or msg is corrupted")
