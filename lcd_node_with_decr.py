@@ -109,7 +109,7 @@ while True:
         ## Display results in the LCD
         lcd_sensor_instance.lcd_clear() 
         lcd_sensor_instance.lcd_display_string("Temp: "+str(temp_in_f)+"F", project_settings.TEMP_DISPLAY, project_settings.OFFSET)
-
+        lcd_sensor_instance.lcd_display_string("Humidity: "+str(humidity)+"%", project_settings.HUMIDITY_DISPLAY, project_settings.OFFSET)
         ## Sleep and restart
         time.sleep(time_recheck_reading)
 
