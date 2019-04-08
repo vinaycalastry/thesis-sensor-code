@@ -61,15 +61,15 @@ def celsius_to_fahrenheit(temperature):
 
 
 ## Open aes key data
-content = bytearray(open("zymkey_protected_secret_aes.dat", mode="rb").read())
-secret_key = zymkey.client.unlock(base64.b64decode(content))
-secret_key_b = bytearray(secret_key)
+#content = bytearray(open("zymkey_protected_secret_aes.dat", mode="rb").read())
+#secret_key = zymkey.client.unlock(base64.b64decode(content))
+secret_key_b = bytearray(b'\xdf\x9a|\x85\x03\xe6\xcd\xe3\r\xdbB~\x9f\xe4\xff\xe4')
 print("Secret AES key unlocked")
 
 ## Open hmac key data
-content_hmac = bytearray(open("zymkey_protected_secret_hmac.dat", mode="rb").read())
-secret_key_hmac = zymkey.client.unlock(base64.b64decode(content_hmac))
-secret_key_hmac_b = bytearray(secret_key_hmac)
+#content_hmac = bytearray(open("zymkey_protected_secret_hmac.dat", mode="rb").read())
+#secret_key_hmac = zymkey.client.unlock(base64.b64decode(content_hmac))
+secret_key_hmac_b = bytearray(b'\x14\xa0\xbd{\xd6O\xfd\xf8\xdc\x94\xa1\xf1\xf31\xd1\xc9\xa9\x84\x06\xb69q3\x85\xfa\x80\xee\x04<\x1b\x16k')
 print("Secret HMAC key unlocked")
 
 print()
@@ -123,8 +123,9 @@ while True:
 
         print("5. Setting LCD values")
         ## Display results in the LCD
-        lcd_sensor_instance.lcd_clear() 
+        lcd_sensor_instance.lcd_clear()
         lcd_sensor_instance.lcd_display_string("Temp: "+str(temp_in_f)+"F", project_settings.TEMP_DISPLAY, project_settings.OFFSET)
+        lcd_sensor_instance.lcd_display_string("Humidity: "+str(humidity)+"%", project_settings.HUMIDITY_DISPLAY, project_settings.OFFSET)
 
         ## Sleep and restart
         #time.sleep(time_recheck_reading)

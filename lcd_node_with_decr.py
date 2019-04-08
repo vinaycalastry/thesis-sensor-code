@@ -85,7 +85,6 @@ while True:
         sig_d = base64.b64decode(b64["signature"])
         ct_d = base64.b64decode(b64["ciphertext"])
         cipher_d = AES.new(secret_key_b, AES.MODE_CBC, iv_d)
-        decrypted_payload = unpad(cipher_d.decrypt(ct_d), AES.block_size)
 
         ## Generate iv data to recreate and check signature
         iv_data = iv_d+ct_d
