@@ -21,7 +21,7 @@ HMAC_ALGO = hashlib.sha256
 
 ## blockchain url and addresses
 smart_contract_address = project_settings.smart_contract_address
-eth_blockchain_url = project_settings.eth_blockchain_url
+eth_blockchain_url = "http://192.168.0.15:8042"
 abi_filename = os.path.abspath("../../../abi/contract_abi.json")
 
 ## Smart Contract Setup
@@ -62,7 +62,7 @@ end = smart_contract_instance.get_current_BCID()
 start = datetime.datetime.now()
 for i in range(start, end):
     file_hash = smart_contract_instance.get_filehash_id(i)
-    res = requests.get("http://localhost:8500/bzz:/"+file_hash+"/")
+    res = requests.get("http://192.168.0.15:8500/bzz:/"+file_hash+"/")
     
     b64 = json.loads(res.text)
     iv_d = base64.b64decode(b64["iv"])

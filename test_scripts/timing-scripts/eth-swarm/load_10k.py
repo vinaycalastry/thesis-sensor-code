@@ -12,7 +12,7 @@ import project_settings
 
 ## blockchain url and addresses
 smart_contract_address = project_settings.smart_contract_address
-eth_blockchain_url = project_settings.eth_blockchain_url
+eth_blockchain_url = "http://192.168.0.14:8042"
 abi_filename = os.path.abspath("../../../abi/contract_abi.json")
 
 ## Smart Contract Setup
@@ -45,7 +45,7 @@ start = datetime.datetime.now()
 for i in total_payload:
 
     x = json.dumps(i)
-    r = requests.post("http://localhost:8500/bzz:/",data=x , headers={'Content-Type': 'text/plain'})
+    r = requests.post("http://192.168.0.14:8500/bzz:/",data=x , headers={'Content-Type': 'text/plain'})
     #filehashes.append(r.text)
     counter += 1
     smart_contract_instance.set_filehash_blockchain_test(r.text)
