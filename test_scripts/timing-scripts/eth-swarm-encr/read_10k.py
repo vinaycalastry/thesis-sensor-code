@@ -55,8 +55,8 @@ print("BEGIN ETH - SWARM TEST")
 
 print("BEGIN COUNTING TIME")
 counter = 0
-startRec = sys.argv[1]
-endRec = smart_contract_instance.get_current_BCID()
+startRec = int(sys.argv[1])
+endRec = int(smart_contract_instance.get_current_BCID())
 #START TEST
 start = datetime.datetime.now()
 for i in range(startRec, endRec):
