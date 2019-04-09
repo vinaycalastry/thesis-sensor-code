@@ -35,7 +35,7 @@ smart_contract_instance.create_smartcontract_obj()
 
 total_payload = list()
 filehashes = list()
-filedir = "/home/pi/vinay/test-payload/"
+filedir = "../data/"
 benchmark_steps = [10, 100, 250, 500, 750, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]
 time_taken_dict = {}
 

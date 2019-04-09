@@ -5,7 +5,7 @@ import requests
 
 total_payload = list()
 filehashes = list()
-filedir = "/home/pi/vinay/test-payload/"
+filedir = "../data/"
 benchmark_steps = [10, 100, 250, 500, 750, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]
 time_taken_dict = {}
 
@@ -22,7 +22,7 @@ print("RECORDS - TIME")
 start = datetime.datetime.now()
 for i in total_payload:
     x = json.dumps(i)
-    r = requests.post("http://localhost:8500/bzz:/",data=x , headers={'Content-Type': 'text/plain'})
+    r = requests.post("http://192.168.0.14:8500/bzz:/",data=x , headers={'Content-Type': 'text/plain'})
     filehashes.append(r.text)
     counter += 1
 
