@@ -55,11 +55,11 @@ print("BEGIN ETH - SWARM TEST")
 
 print("BEGIN COUNTING TIME")
 counter = 0
-start = sys.argv[1]
-end = smart_contract_instance.get_current_BCID()
+startRec = sys.argv[1]
+endRec = smart_contract_instance.get_current_BCID()
 #START TEST
 start = datetime.datetime.now()
-for i in range(start, end):
+for i in range(startRec, endRec):
     file_hash = smart_contract_instance.get_filehash_id(i)
     res = requests.get("http://192.168.0.15:8500/bzz:/"+file_hash+"/")
     
