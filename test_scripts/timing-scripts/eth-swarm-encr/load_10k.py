@@ -4,7 +4,6 @@ import datetime
 import requests
 import os
 import sys
-import zymkey
 import base64
 from Cryptodome.Cipher import AES
 from Cryptodome.Util.Padding import pad, unpad
