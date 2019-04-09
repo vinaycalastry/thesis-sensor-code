@@ -8,6 +8,10 @@ from Cryptodome.Util.Padding import pad, unpad
 import hashlib
 import hmac
 
+
+# Use HMAC algorithm
+HMAC_ALGO = hashlib.sha256
+
 total_payload = list()
 filehashes = list()
 filedir = "../data/"
