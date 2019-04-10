@@ -42,6 +42,9 @@ print("BEGIN ETH - SWARM TEST")
 #Load test file data to python object
 with open(filedir + 'payload_10k.json', 'r') as f:
     total_payload = json.load(f)
+
+total_payload = total_payload[0:5000]
+
 print("LOAD TEST DATA")
 print("Start ID stored in the Ethereum Blockchain is: ", str(smart_contract_instance.get_current_BCID()))
 secret_key_b = bytearray(b'\xdf\x9a|\x85\x03\xe6\xcd\xe3\r\xdbB~\x9f\xe4\xff\xe4')

@@ -16,6 +16,7 @@ print("BEGIN IPFS TEST")
 with open(filedir + 'payload_10k.json', 'r') as f:
     total_payload = json.load(f)
 print("LOAD TEST DATA")
+total_payload = total_payload[0:5000]
 
 counter = 0
 #START TEST

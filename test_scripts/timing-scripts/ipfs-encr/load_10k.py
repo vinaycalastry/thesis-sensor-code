@@ -24,6 +24,8 @@ print("BEGIN SWARM TEST")
 with open(filedir + 'payload_10k.json', 'r') as f:
     total_payload = json.load(f)
 print("LOAD TEST DATA")
+
+total_payload = total_payload[0:5000]
 secret_key_b = bytearray(b'\xdf\x9a|\x85\x03\xe6\xcd\xe3\r\xdbB~\x9f\xe4\xff\xe4')
 secret_key_hmac_b = bytearray(b'\x14\xa0\xbd{\xd6O\xfd\xf8\xdc\x94\xa1\xf1\xf31\xd1\xc9\xa9\x84\x06\xb69q3\x85\xfa\x80\xee\x04<\x1b\x16k')
 api = ipfsapi.connect('192.168.0.14', 5001)
