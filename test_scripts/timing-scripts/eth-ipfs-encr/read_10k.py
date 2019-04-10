@@ -61,9 +61,7 @@ endRec = int(smart_contract_instance.get_current_BCID())
 start = datetime.datetime.now()
 for i in range(startRec, endRec):
     file_hash = smart_contract_instance.get_filehash_id(i)
-    res = api.get_json(file_hash)
-    
-    b64 = json.loads(res)
+    b64 = api.get_json(file_hash)
     iv_d = base64.b64decode(b64["iv"])
     sig_d = base64.b64decode(b64["signature"])
     ct_d = base64.b64decode(b64["ciphertext"])
