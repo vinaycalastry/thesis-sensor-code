@@ -71,7 +71,7 @@ for i in total_payload:
     r = api.add_str(x)
     #filehashes.append(r.text)
     counter += 1
-    smart_contract_instance.set_filehash_blockchain_test(r.text)
+    smart_contract_instance.set_filehash_blockchain_test(r)
 
     if counter in benchmark_steps:
         end = datetime.datetime.now()

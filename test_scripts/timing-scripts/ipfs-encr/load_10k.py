@@ -48,7 +48,7 @@ for i in total_payload:
 
     x = json.dumps({ "iv": iv, "ciphertext": ct, "signature": sig})
     r = api.add_str(x)
-    filehashes.append(r.text)
+    filehashes.append(r)
     counter += 1
 
     if counter in benchmark_steps:
