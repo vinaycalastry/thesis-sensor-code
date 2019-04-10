@@ -41,7 +41,7 @@ start = datetime.datetime.now()
 for i in range(startRec, endRec):
     file_hash = smart_contract_instance.get_filehash_id(i)
     res = api.get_json(file_hash)
-    total_payload.append(res.text)
+    total_payload.append(res)
     counter += 1
     
     if counter in benchmark_steps:

@@ -44,7 +44,7 @@ counter = 0
 start = datetime.datetime.now()
 for i in filehashes:
     res = api.get_json(i)
-    b64 = json.loads(res.text)
+    b64 = json.loads(res)
     iv_d = base64.b64decode(b64["iv"])
     sig_d = base64.b64decode(b64["signature"])
     ct_d = base64.b64decode(b64["ciphertext"])

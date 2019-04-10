@@ -38,6 +38,8 @@ with open(filedir + 'payload_10k.json', 'r') as f:
 print("LOAD TEST DATA")
 print("Start ID stored in the Ethereum Blockchain is: ", str(smart_contract_instance.get_current_BCID()))
 
+total_payload = total_payload[0:5000]
+
 counter = 0
 #START TEST
 print("BEGIN COUNTING TIME")
