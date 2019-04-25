@@ -48,12 +48,19 @@ start = datetime.datetime.now()
 for i in total_payload:
 
     temperature = i["Temperature"]
-    
+    humidity = i["Humidity"]
+    tempunits = i["TemperatureUnits"]
+    humiunits = i["HumidityUnits"]
+    timestamp = i["Timestamp"]
+    devicetype = i["DeviceType"]
+    deviceid = i["DeviceID"]
+    deviceip = i["DeviceIP"]
+    sensortype = i["SensorType"]
 
     
     #filehashes.append(r.text)
     counter += 1
-    smart_contract_instance.set_filehash_blockchain_test(x)
+    smart_contract_instance.set_blockchain(temperature, humidity, tempunits, humiunits, timestamp, devicetype, deviceid, deviceip, sensortype)
 
     if counter in benchmark_steps:
         end = datetime.datetime.now()
