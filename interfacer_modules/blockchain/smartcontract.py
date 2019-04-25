@@ -51,6 +51,12 @@ class SmartContractCaller:
 
         return temp_and_humidity
 
+    ## Test function to send temp and humidity and the full payload to blockchain
+    def set_blockchain(self, temp, humi, tempunits, humiunits, timestamp, devicetype, deviceid, deviceip, sensortype):
+        set_fn_txn_hash = self.sensor_contract.functions.setSensorData(temp, humi, tempunits, humiunits, timestamp, devicetype, deviceid, deviceip, sensortype).transact({"from":self.executor_address})
+        #res = self.w3.eth.waitForTransactionReceipt(set_fn_txn_hash)
+        #return res
+
     ## function to save swarm filehash to blockchain
     def set_filehash_blockchain(self, filehash):
         set_fn_txn_hash = self.sensor_contract.functions.setSensorData(filehash).transact({"from":self.executor_address})
