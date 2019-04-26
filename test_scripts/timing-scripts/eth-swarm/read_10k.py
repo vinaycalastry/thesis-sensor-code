@@ -13,7 +13,7 @@ import project_settings
 
 ## blockchain url and addresses
 smart_contract_address = project_settings.smart_contract_address
-eth_blockchain_url = "http://192.168.0.15:8042"
+eth_blockchain_url = "http://192.168.0.20:8043"
 abi_filename = os.path.abspath("../../../abi/contract_abi.json")
 
 ## Smart Contract Setup
