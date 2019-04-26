@@ -21,7 +21,7 @@ counter = 0
 #START TEST
 start = datetime.datetime.now()
 for i in filehashes:
-    res = requests.get("http://192.168.0.15:8500/bzz:/"+i+"/")
+    res = requests.get("http://192.168.0.20:8500/bzz:/"+i+"/")
     total_payload.append(res.text)
     counter += 1
 

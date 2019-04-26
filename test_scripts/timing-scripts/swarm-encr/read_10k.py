@@ -43,7 +43,7 @@ counter = 0
 #START TEST
 start = datetime.datetime.now()
 for i in filehashes:
-    res = requests.get("http://192.168.0.15:8500/bzz:/"+i+"/")
+    res = requests.get("http://192.168.0.20:8500/bzz:/"+i+"/")
     b64 = json.loads(res.text)
     iv_d = base64.b64decode(b64["iv"])
     sig_d = base64.b64decode(b64["signature"])

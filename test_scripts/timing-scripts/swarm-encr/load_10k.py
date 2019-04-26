@@ -44,7 +44,7 @@ for i in total_payload:
     sig = base64.b64encode(sig).decode("utf-8")
 
     x = json.dumps({ "iv": iv, "ciphertext": ct, "signature": sig})
-    r = requests.post("http://192.168.0.14:8500/bzz:/",data=x , headers={'Content-Type': 'text/plain'})
+    r = requests.post("http://192.168.0.20:8500/bzz:/",data=x , headers={'Content-Type': 'text/plain'})
     filehashes.append(r.text)
     counter += 1
 

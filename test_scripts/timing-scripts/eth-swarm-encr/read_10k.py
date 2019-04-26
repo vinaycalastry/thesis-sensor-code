@@ -61,7 +61,7 @@ endRec = int(smart_contract_instance.get_current_BCID())
 start = datetime.datetime.now()
 for i in range(startRec, endRec):
     file_hash = smart_contract_instance.get_filehash_id(i)
-    res = requests.get("http://192.168.0.15:8500/bzz:/"+file_hash+"/")
+    res = requests.get("http://192.168.0.20:8500/bzz:/"+file_hash+"/")
     
     b64 = json.loads(res.text)
     iv_d = base64.b64decode(b64["iv"])

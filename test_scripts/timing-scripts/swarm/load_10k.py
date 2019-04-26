@@ -22,7 +22,7 @@ print("RECORDS - TIME")
 start = datetime.datetime.now()
 for i in total_payload:
     x = json.dumps(i)
-    r = requests.post("http://192.168.0.14:8500/bzz:/",data=x , headers={'Content-Type': 'text/plain'})
+    r = requests.post("http://192.168.0.20:8500/bzz:/",data=x , headers={'Content-Type': 'text/plain'})
     filehashes.append(r.text)
     counter += 1
 
