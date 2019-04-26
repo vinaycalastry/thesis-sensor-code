@@ -37,7 +37,7 @@ def compare_mac(mac, mac_verif):
     for x, y in zip(mac, mac_verif):
         result |= x ^ y
     return result == 0
-api = ipfsapi.connect('192.168.0.20', 5001)
+api = ipfsapi.connect('127.0.0.1', 5001)
 print("BEGIN COUNTING TIME")
 counter = 0
 #START TEST

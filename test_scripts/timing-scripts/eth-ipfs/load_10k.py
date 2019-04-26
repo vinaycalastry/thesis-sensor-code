@@ -15,7 +15,7 @@ import project_settings
 smart_contract_address = project_settings.smart_contract_address
 eth_blockchain_url = "http://192.168.0.20:8043"
 abi_filename = os.path.abspath("../../../abi/contract_abi.json")
-api = ipfsapi.connect('192.168.0.20', 5001)
+api = ipfsapi.connect('127.0.0.1', 5001)
 ## Smart Contract Setup
 smart_contract_instance = SmartContractCaller(smart_contract_address, eth_blockchain_url)
 

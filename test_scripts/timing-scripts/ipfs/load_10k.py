@@ -9,7 +9,7 @@ filedir = "../data/"
 benchmark_steps = [10, 100, 250, 500, 750, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]
 
 time_taken_dict = {}
-api = ipfsapi.connect('192.168.0.20', 5001)
+api = ipfsapi.connect('127.0.0.1', 5001)
 
 print("BEGIN IPFS TEST")
 #Load test file data to python object
