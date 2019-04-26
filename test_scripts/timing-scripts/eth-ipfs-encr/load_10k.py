@@ -20,9 +20,9 @@ HMAC_ALGO = hashlib.sha256
 
 ## blockchain url and addresses
 smart_contract_address = project_settings.smart_contract_address
-eth_blockchain_url = "http://192.168.0.14:8042"
+eth_blockchain_url = "http://192.168.0.20:8043"
 abi_filename = os.path.abspath("../../../abi/contract_abi.json")
-api = ipfsapi.connect('192.168.0.14', 5001)
+api = ipfsapi.connect('192.168.0.20', 5001)
 ## Smart Contract Setup
 smart_contract_instance = SmartContractCaller(smart_contract_address, eth_blockchain_url)
 
@@ -43,7 +43,7 @@ print("BEGIN ETH - SWARM TEST")
 with open(filedir + 'payload_10k.json', 'r') as f:
     total_payload = json.load(f)
 
-total_payload = total_payload[0:5000]
+#total_payload = total_payload[0:5000]
 
 print("LOAD TEST DATA")
 print("Start ID stored in the Ethereum Blockchain is: ", str(smart_contract_instance.get_current_BCID()))
