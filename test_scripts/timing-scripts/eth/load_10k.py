@@ -47,15 +47,15 @@ print("RECORDS - TIME")
 start = datetime.datetime.now()
 for i in total_payload:
 
-    temperature = i["Temperature"]
-    humidity = i["Humidity"]
-    tempunits = i["TemperatureUnits"]
-    humiunits = i["HumidityUnits"]
-    timestamp = i["Timestamp"]
-    devicetype = i["DeviceType"]
-    deviceid = i["DeviceID"]
-    deviceip = i["DeviceIP"]
-    sensortype = i["SensorType"]
+    temperature = str(i["Temperature"])
+    humidity = str(i["Humidity"])
+    tempunits = str(i["TemperatureUnits"])
+    humiunits = str(i["HumidityUnits"])
+    timestamp = str(i["Timestamp"])
+    devicetype = str(i["DeviceType"])
+    deviceid = str(i["DeviceID"])
+    deviceip = str(i["DeviceIP"])
+    sensortype = str(i["SensorType"])
 
     
     #filehashes.append(r.text)
